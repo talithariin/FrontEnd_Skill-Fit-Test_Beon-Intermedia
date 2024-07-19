@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import "./App.scss";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <DashboardLayout />
+    </>
+  );
 };
 
 export default App;
