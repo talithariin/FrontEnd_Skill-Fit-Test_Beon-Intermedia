@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.scss";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import ErrorBoundary from "antd/es/alert/ErrorBoundary";
 
 const DashboardLayout = React.lazy(() => import("./layouts/DashboardLayout"));
 const Page404 = React.lazy(() => import("./components/organisms/Page404"));
@@ -10,6 +11,9 @@ const PageLoading = React.lazy(() =>
 const ListResident = React.lazy(() => import("./pages/Resident/ListResident"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard/Dashboard"));
 const ListHouse = React.lazy(() => import("./pages/House/ListHouse"));
+const ListHouseResident = React.lazy(() =>
+  import("./pages/HouseResident/ListHouseResident")
+);
 
 const AppContent = () => {
   return (
@@ -45,6 +49,16 @@ const AppContent = () => {
           </Suspense>
         }
       />
+      <Route
+        path="/house-resident"
+        element={
+          <Suspense fallback={<PageLoading />}>
+            <DashboardLayout>
+              <ListHouseResident />
+            </DashboardLayout>
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };
@@ -52,9 +66,11 @@ const AppContent = () => {
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PageLoading />}>
-        <AppContent />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoading />}>
+          <AppContent />
+        </Suspense>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }

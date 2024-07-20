@@ -82,3 +82,14 @@ export const editHouse = async (id, data) => {
   const url = `${API_URL}/house/${id}`;
   return await put(url, data);
 };
+
+/* ========================================================= House Resident ========================================================= */
+export const getAllHouseResident = async () => {
+  const url = `${API_URL}/house-resident`;
+  return await get(url);
+};
+
+export const getHouseResidentByHouseId = async (houseId) => {
+  const url = `${API_URL}/house-resident/${houseId}`;
+  return await get(url);
+};

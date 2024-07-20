@@ -29,8 +29,8 @@ export default function ListHouse() {
     setLoading(true);
     getAllHouse()
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
+        setChildData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -54,6 +54,11 @@ export default function ListHouse() {
 
   const addData = () => {
     setSection("add");
+  };
+
+  const viewData = (record) => {
+    setChildData(record);
+    setSection("view");
   };
 
   const columns = [
@@ -113,6 +118,11 @@ export default function ListHouse() {
       render: (text, record) => (
         <>
           <div className="flex items-center gap-x-1">
+            <BButton
+              customclass="py-2 px-2 rounded-lg border hover:border-primary"
+              icon={<EyeFilled className="text-gray-600 hover:text-primary" />}
+              onClick={() => viewData(record)}
+            />
             <BButton
               customclass="py-2 px-2 rounded-lg border hover:border-primary"
               icon={<EditFilled className="text-gray-600 hover:text-primary" />}
