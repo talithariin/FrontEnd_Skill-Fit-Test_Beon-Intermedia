@@ -9,6 +9,7 @@ const PageLoading = React.lazy(() =>
 );
 const ListResident = React.lazy(() => import("./pages/Resident/ListResident"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard/Dashboard"));
+const ListHouse = React.lazy(() => import("./pages/House/ListHouse"));
 
 const AppContent = () => {
   return (
@@ -30,6 +31,16 @@ const AppContent = () => {
           <Suspense fallback={<PageLoading />}>
             <DashboardLayout>
               <ListResident />
+            </DashboardLayout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/house"
+        element={
+          <Suspense fallback={<PageLoading />}>
+            <DashboardLayout>
+              <ListHouse />
             </DashboardLayout>
           </Suspense>
         }

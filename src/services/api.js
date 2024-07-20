@@ -66,3 +66,19 @@ export const deleteResident = async (id) => {
   const url = `${API_URL}/resident/${id}`;
   return await delete_request(url);
 };
+
+/* ========================================================= House ========================================================= */
+export const getAllHouse = async () => {
+  const url = `${API_URL}/house`;
+  return await get(url);
+};
+
+export const addHouse = async (data) => {
+  const url = `${API_URL}/house`;
+  return await post(url, data);
+};
+
+export const editHouse = async (id, data) => {
+  const url = `${API_URL}/house/${id}`;
+  return await put(url, data);
+};

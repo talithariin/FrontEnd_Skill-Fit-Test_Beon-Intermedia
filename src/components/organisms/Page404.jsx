@@ -12,7 +12,7 @@ export default function Page404() {
         subTitle="Halaman yang dituju belum ada"
         extra={
           <Button type="primary" onClick={() => navigate("/")}>
-            Back Home
+            Kembali ke Dashboard
           </Button>
         }
       />

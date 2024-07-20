@@ -62,7 +62,7 @@ export default function FormSection(props) {
           console.log(err);
           notification.error({
             message: "Gagal",
-            description: err.response.data.errors,
+            description: err.response?.data?.errors,
           });
         })
         .finally(() => {
@@ -87,7 +87,7 @@ export default function FormSection(props) {
           console.log(err);
           notification.error({
             message: "Gagal",
-            description: err.response.data.errors,
+            description: err.response?.data?.errors,
           });
         })
         .finally(() => {
