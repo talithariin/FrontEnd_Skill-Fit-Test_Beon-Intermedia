@@ -1,1 +1,68 @@
 import axios from "axios";
+import {
+  get,
+  post,
+  put,
+  patch,
+  patch_no_data,
+  delete_request,
+} from "../utils/HttpRequest";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+/* ========================================================= Resident ========================================================= */
+export const getAllResident = async () => {
+  const url = `${API_URL}/resident`;
+  return await get(url);
+};
+
+export const addResident = async (data) => {
+  const url = `${API_URL}/resident`;
+  const formData = new FormData();
+
+  Object.keys(data).forEach((key) => {
+    if (data[key] !== null && data[key] !== undefined) {
+      if (data[key] instanceof File) {
+        formData.append(key, data[key]);
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+  });
+
+  return await post(url, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const editResident = async (id, data) => {
+  const url = `${API_URL}/resident/${id}`;
+  const formData = new FormData();
+
+  Object.keys(data).forEach((key) => {
+    if (data[key] !== null && data[key] !== undefined) {
+      if (data[key] instanceof File) {
+        formData.append(key, data[key]);
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+  });
+
+  return await put(url, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const deleteResident = async (id) => {
+  const url = `${API_URL}/resident/${id}`;
+  return await delete_request(url);
+};

@@ -50,9 +50,17 @@ p {
       @apply p-8;
     }
     .footer {
-      @apply px-8 pt-4 pb-4 flex justify-end gap-x-3 border-t-2;
+      @apply px-8 pt-4 pb-4 flex justify-end gap-x-3 mx-8;
+      border-top: 2px solid #d3d3d3; /* Light gray color */
     }
   }
+}
+
+.ant-form-item-required::after {
+  content: "*";
+  color: red;
+  margin-left: 4px;
+  display: inline-block;
 }
 
 .ant-menu-item-selected {
@@ -62,4 +70,9 @@ p {
 
 .ant-menu-submenu-selected > .ant-menu-submenu-title {
   color: $secondary !important;
+}
+
+.ant-btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
 }

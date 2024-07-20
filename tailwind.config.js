@@ -6,6 +6,7 @@ export default {
     colors: {
       baseColor: "#4B5563",
       primary: "#2e83b4",
+      bgPrimary: "#eaf3f8",
       navy: "#005F8F",
       warning: "#FACC15",
       secondary: "#f39518",

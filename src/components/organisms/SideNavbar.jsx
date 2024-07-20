@@ -1,62 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Menu } from "antd";
-import _ from "lodash";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const items = [
   {
-    key: "1",
+    key: "/",
     icon: <i className="bi bi-speedometer"></i>,
     label: "Dashboard",
   },
   {
-    key: "2",
+    key: "/resident",
     icon: <i className="bi bi-people-fill" />,
     label: "Kelola Penghuni",
   },
   {
-    key: "3",
+    key: "kelola-perumahan",
     icon: <i className="bi bi-houses-fill"></i>,
     label: "Kelola Perumahan",
     children: [
       {
-        key: "31",
+        key: "/house",
         label: "Rumah",
       },
       {
-        key: "32",
+        key: "/house-resident",
         label: "Penghuni Rumah",
       },
     ],
   },
   {
-    key: "4",
+    key: "/fee-type",
     icon: <i className="bi bi-cash-stack"></i>,
     label: "Kelola Iuran",
   },
   {
-    key: "5",
+    key: "/payment",
     icon: <i className="bi bi-credit-card"></i>,
     label: "Kelola Pembayaran",
   },
   {
-    key: "6",
+    key: "/income",
     icon: <i className="bi bi-wallet"></i>,
     label: "Kelola Pemasukan",
   },
   {
-    key: "7",
+    key: "/expenses",
     icon: <i className="bi bi-cash"></i>,
     label: "Kelola Pengeluaran",
   },
 ];
 
-const getLevelKeys = (items1) => {
+const getLevelKeys = (items) => {
   const key = {};
-  const func = (items2, level = 1) => {
-    items2.forEach((item) => {
+  const func = (items, level = 1) => {
+    items.forEach((item) => {
       if (item.key) {
         key[item.key] = level;
       }
@@ -65,13 +64,26 @@ const getLevelKeys = (items1) => {
       }
     });
   };
-  func(items1);
+  func(items);
   return key;
 };
 const levelKeys = getLevelKeys(items);
 
 export default function SideNavbar() {
-  const [stateOpenKeys, setStateOpenKeys] = useState(["1"]);
+  const [stateOpenKeys, setStateOpenKeys] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const pathKey = location.pathname;
+    const parentKey = items.find((item) =>
+      item.children?.some((child) => child.key === pathKey)
+    )?.key;
+
+    if (parentKey) {
+      setStateOpenKeys([parentKey]);
+    }
+  }, [location.pathname]);
 
   const onOpenChange = (openKeys) => {
     const currentOpenKey = openKeys.find(
@@ -91,13 +103,19 @@ export default function SideNavbar() {
     }
   };
 
+  const handleClick = (e) => {
+    const { key } = e;
+    navigate(key);
+  };
+
   return (
     <Sider width={280} className="overflow-y-auto">
       <Menu
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[location.pathname]}
         openKeys={stateOpenKeys}
         onOpenChange={onOpenChange}
+        onClick={handleClick}
         style={{
           width: 280,
           height: "100%",
