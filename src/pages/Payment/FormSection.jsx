@@ -78,7 +78,9 @@ export default function FormSection(props) {
         house_id: childData.house_id,
         resident_id: childData.resident_id,
         fee_type_id: childData.fee_type_id,
-        payment_date: dayjs(childData.payment_date),
+        payment_date: childData.payment_date
+          ? dayjs(childData.payment_date)
+          : null,
         period: childData.period,
         amount: numberWithCommas(childData.amount),
         status: childData.status,
