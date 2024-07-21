@@ -135,3 +135,14 @@ export const editPayment = async (id, data) => {
   const url = `${API_URL}/payment/${id}`;
   return await put(url, data);
 };
+
+/* ========================================================= Income ========================================================= */
+export const getAllIncome = async () => {
+  const url = `${API_URL}/income`;
+  return await get(url);
+};
+
+export const getMonthlyIncome = async (month, year) => {
+  const url = `${API_URL}/income/monthly/${month}/${year}`;
+  return await get(url);
+};
