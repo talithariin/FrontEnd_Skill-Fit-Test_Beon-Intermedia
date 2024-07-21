@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Table, Modal, notification, Image } from "antd";
+import React, { useState, useEffect } from "react";
+import { Table, notification } from "antd";
+import { getAllFeeType } from "../../services/api";
+import "./FormSection";
 import { BButton } from "../../components/atoms/Buttons";
-import {
-  EyeFilled,
-  EditFilled,
-  DeleteFilled,
-  PlusOutlined,
-  ExclamationCircleOutlined,
-} from "@ant-design/icons";
+import { EditFilled, PlusOutlined } from "@ant-design/icons";
+import { numberWithCommas } from "../../utils/Helper";
 import FormSection from "./FormSection";
-import { getAllHouse } from "../../services/api";
 
-export default function ListHouse() {
+export default function ListFeeType() {
   const [section, setSection] = useState("default");
   const [loading, setLoading] = useState(false);
   const [childData, setChildData] = useState({});
@@ -24,8 +20,9 @@ export default function ListHouse() {
 
   const getDataHouse = () => {
     setLoading(true);
-    getAllHouse()
+    getAllFeeType()
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
         setChildData(res.data);
       })
@@ -60,50 +57,34 @@ export default function ListHouse() {
 
   const columns = [
     {
-      title: "Alamat",
-      dataIndex: "address",
-      key: "address",
-      sorter: (a, b) => a.address.localeCompare(b.address),
+      title: "Nama Iuran",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      title: "Status Rumah",
-      dataIndex: "status",
-      key: "status",
-      sorter: (a, b) => a.status.localeCompare(b.status),
+      title: "Nominal Iuran",
+      dataIndex: "amount",
+      key: "amount",
+      sorter: (a, b) => a.amount.localeCompare(b.amount),
+      render: (amount) => `Rp ${numberWithCommas(amount)}`,
+    },
+    {
+      title: "Frekuensi Iuran",
+      dataIndex: "frequency",
+      key: "frequency",
       render: (text) => {
         switch (text) {
-          case "occupied":
-            return "Dihuni";
-          case "unoccupied":
-            return "Tidak Dihuni";
+          case "once":
+            return "Sekali";
+          case "monthly":
+            return "Tiap Bulan";
+          case "yearly":
+            return "Tiap Tahun";
           case null:
             return "-";
           default:
             return text;
-        }
-      },
-    },
-    {
-      title: "Penghuni",
-      dataIndex: "residentData",
-      key: "resident_fullname",
-      render: (residentData) => (residentData ? residentData.fullname : "-"),
-    },
-    {
-      title: "Status Penghuni",
-      dataIndex: "residentData",
-      key: "resident_status",
-      render: (residentData) => {
-        if (!residentData) return "-";
-        switch (residentData.status) {
-          case "permanent":
-            return "Tetap";
-          case "contract":
-            return "Kontrak";
-          case null:
-            return "-";
-          default:
-            return residentData.status;
         }
       },
     },
@@ -115,11 +96,6 @@ export default function ListHouse() {
       render: (text, record) => (
         <>
           <div className="flex items-center gap-x-1">
-            <BButton
-              customclass="py-2 px-2 rounded-lg border hover:border-primary"
-              icon={<EyeFilled className="text-gray-600 hover:text-primary" />}
-              onClick={() => viewData(record)}
-            />
             <BButton
               customclass="py-2 px-2 rounded-lg border hover:border-primary"
               icon={<EditFilled className="text-gray-600 hover:text-primary" />}
@@ -136,7 +112,7 @@ export default function ListHouse() {
       {section === "default" && (
         <div className="content-section">
           <div className="header">
-            <h2>Daftar Rumah</h2>
+            <h2>Daftar Jenis Iuran</h2>
             <div className="flex items-center gap-4">
               <BButton
                 customclass="py-2 px-4 bg-primary text-white rounded-md"

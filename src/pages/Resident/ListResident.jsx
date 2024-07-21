@@ -29,6 +29,7 @@ export default function ListResident() {
     getAllResident()
       .then((res) => {
         setData(res.data);
+        setChildData.apply(res.data);
       })
       .catch((err) => {
         console.log(err);

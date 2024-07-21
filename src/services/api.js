@@ -93,3 +93,29 @@ export const getHouseResidentByHouseId = async (houseId) => {
   const url = `${API_URL}/house-resident/${houseId}`;
   return await get(url);
 };
+
+export const addHouseResident = async (data) => {
+  const url = `${API_URL}/house-resident`;
+  return await post(url, data);
+};
+
+export const editHouseResident = async (id, data) => {
+  const url = `${API_URL}/house-resident/${id}`;
+  return await put(url, data);
+};
+
+/* ========================================================= Fee Type ========================================================= */
+export const getAllFeeType = async () => {
+  const url = `${API_URL}/fee`;
+  return await get(url);
+};
+
+export const editFeeType = async (id, data) => {
+  const url = `${API_URL}/fee/${id}`;
+  return await put(url, data);
+};
+
+export const addFeeType = async (data) => {
+  const url = `${API_URL}/fee`;
+  return await post(url, data);
+};
