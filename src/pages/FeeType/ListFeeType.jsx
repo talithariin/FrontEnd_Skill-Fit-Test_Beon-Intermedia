@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, notification } from "antd";
+import { Table } from "antd";
 import { getAllFeeType } from "../../services/api";
 import "./FormSection";
 import { BButton } from "../../components/atoms/Buttons";

@@ -146,3 +146,19 @@ export const getMonthlyIncome = async (month, year) => {
   const url = `${API_URL}/income/monthly/${month}/${year}`;
   return await get(url);
 };
+
+/* ========================================================= Expenses ========================================================= */
+export const getAllExpense = async () => {
+  const url = `${API_URL}/expense`;
+  return await get(url);
+};
+
+export const addExpense = async (data) => {
+  const url = `${API_URL}/payment`;
+  return await post(url, data);
+};
+
+export const getMonthlyExpenses = async (month, year) => {
+  const url = `${API_URL}/expense/monthly/${month}/${year}`;
+  return await get(url);
+};

@@ -17,7 +17,6 @@ export default function ListHouse() {
     setLoading(true);
     getAllIncome()
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {

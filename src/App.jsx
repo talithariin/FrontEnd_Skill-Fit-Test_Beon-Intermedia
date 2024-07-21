@@ -17,7 +17,7 @@ const ListHouseResident = React.lazy(() =>
 const ListFeeType = React.lazy(() => import("./pages/FeeType/ListFeeType"));
 const ListPayment = React.lazy(() => import("./pages/Payment/ListPayment"));
 const ListIncome = React.lazy(() => import("./pages/Income/ListIncome"));
-const ListExpense = React.lazy(() => import("./pages/Expenses/ListExpenses"));
+const ListExpenses = React.lazy(() => import("./pages/Expenses/ListExpenses"));
 
 const AppContent = () => {
   return (
@@ -98,7 +98,7 @@ const AppContent = () => {
         element={
           <Suspense fallback={<PageLoading />}>
             <DashboardLayout>
-              <ListExpense />
+              <ListExpenses />
             </DashboardLayout>
           </Suspense>
         }
