@@ -119,3 +119,19 @@ export const addFeeType = async (data) => {
   const url = `${API_URL}/fee`;
   return await post(url, data);
 };
+
+/* ========================================================= Payment ========================================================= */
+export const getAllPayment = async () => {
+  const url = `${API_URL}/payment`;
+  return await get(url);
+};
+
+export const addPayment = async (data) => {
+  const url = `${API_URL}/payment`;
+  return await post(url, data);
+};
+
+export const editPayment = async (id, data) => {
+  const url = `${API_URL}/payment/${id}`;
+  return await put(url, data);
+};

@@ -48,3 +48,27 @@ export const renderHouseStatus = (status) => {
       return "-";
   }
 };
+
+export const renderPaymentPeriod = (period) => {
+  switch (period) {
+    case "once":
+      return "Sekali";
+    case "monthly":
+      return "Bulanan";
+    case "yearly":
+      return "Tahunan";
+    default:
+      return "-";
+  }
+};
+
+export const renderPaymentStatus = (status) => {
+  switch (status) {
+    case "paid":
+      return "Dibayar";
+    case "unpaid":
+      return "Belum Dibayar";
+    default:
+      return "-";
+  }
+};

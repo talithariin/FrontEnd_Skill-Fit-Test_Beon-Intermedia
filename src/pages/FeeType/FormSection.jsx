@@ -141,7 +141,7 @@ export default function FormSection(props) {
                       placeholder="0"
                       onChange={handleAmountChange}
                     />
-                  </Form.Item>{" "}
+                  </Form.Item>
                 </Col>
               </Row>
             </div>
